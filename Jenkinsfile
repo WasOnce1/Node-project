@@ -3,8 +3,6 @@ pipeline {
     
     environment {
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/repositories/amehta2910/'
-        DOCKER_USERNAME = credentials('DOCKER_USERNAME')  // Use Jenkins credentials ID
-        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')  // Use Jenkins credentials ID
     }
     
     stages {
@@ -22,7 +20,7 @@ pipeline {
         
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     bat '''
                     docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%
                     docker tag my-app:1.0 amehta2910/nodeproject:1.0

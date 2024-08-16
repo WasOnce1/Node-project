@@ -23,8 +23,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     bat '''
                     docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%
-                    docker tag my-app:1.0 amehta2910/nodeproject:1.0
-                    docker push amehta2910/nodeproject:1.0
+                    docker tag my-app:1.0 amehta2910/nodeproject:1.1
+                    docker push amehta2910/nodeproject:1.1
                     docker logout
                     '''
                 }

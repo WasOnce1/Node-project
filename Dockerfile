@@ -2,7 +2,7 @@
 FROM node:18
 
 # Set the working directory inside the container
-WORKDIR /home/app
+WORKDIR /home/app/public
 
 # Copy package.json and package-lock.json for npm install
 COPY package*.json ./

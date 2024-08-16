@@ -21,15 +21,16 @@ pipeline {
             }
         
         
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    // Login to Docker registry
-                    docker.withRegistry(DOCKER_REGISTRY_URL, "${DOCKER_USERNAME}:${DOCKER_PASSWORD}") {
-                        docker.image('my-app').push('1.0')
+        stage('Docker Push') {
+           steps {
+                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) { 
+                sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB PASSWORD"
+                sh 'docker tag my-app:1.0 amehta2910/nodeproject:1.0"
+                sh 'docker push amehta2910/nodeproject:1.0"
+                sh 'docker logout' 
                     }
                 }
             }
         }
     }
-}
+
